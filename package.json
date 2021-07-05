@@ -10,10 +10,16 @@
   "scripts": {
     "build": "tsc"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lochungtin/node-exp-solver.git"
+  },
   "keywords": [
     "RPN",
     "Solver",
-    "Equation"
+    "Equation",
+    "Tokenizer",
+    "Mathematical Expression"
   ],
   "author": "enigamoffline",
   "license": "MIT",
