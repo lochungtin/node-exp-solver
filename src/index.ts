@@ -112,6 +112,12 @@ class Solver {
 
     // private methods
 
+    /**
+     * Recursively solve an RPN expression
+     * @param {Array<string>} rpn       - original RPN expression 
+     * @param {Array<number>} stack     - memory stack used for recursive computation
+     * @returns {number}                - evaluated value
+     */
     private static solveRec = (rpn: Array<string>, stack: Array<number> = []): number => {
         if (rpn.length === 0)
             return stack[0];
