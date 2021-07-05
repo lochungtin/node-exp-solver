@@ -1,0 +1,23 @@
+{
+  "name": "@enigmaoffline/node-exp-solver",
+  "version": "1.0.0",
+  "description": "Mathematical expression solver / Reverse Polish Notation calculator for NodeJS",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc"
+  },
+  "keywords": [
+    "RPN",
+    "Solver",
+    "Equation"
+  ],
+  "author": "enigamoffline",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^16.0.0"
+  }
+}
