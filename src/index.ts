@@ -128,6 +128,7 @@ class Solver {
                 let num1: number = stack.splice(stack.length - 1, 1)[0];
                 let num2: number = stack.splice(stack.length - 1, 1)[0];
 
+                // recursive calculation
                 switch (head) {
                     case '+':
                         return Solver.solveRec(rpn, [...stack, num2 + num1]);
