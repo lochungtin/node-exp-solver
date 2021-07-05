@@ -13,11 +13,16 @@ const precMap: precMapType = {
 
 class Solver {
 
-    static tokenize = (eq: string): Array<string> => {
+    /**
+     * Tokenize an infix-notated expression string
+     * @param {string} exp      - mathematical expression
+     * @returns {Array<string>} - tokenized expression
+     */
+    static tokenize = (exp: string): Array<string> => {
         let res: Array<string> = [];
         let term: string = '';
 
-        eq.split('').forEach((ch: string, index: number) => {
+        exp.split('').forEach((ch: string, index: number) => {
             switch (true) {
                 // negative numbers
                 case ch === '-' && index === 0:
@@ -47,14 +52,20 @@ class Solver {
         return res;
     }
 
-    static toRPN = (eq: Array<string>): Array<string> => {
+    /**
+     * Converts an infix-notated expression to reverse polish notation
+     * @param {Array<string>} exp   - tokenized infix-notated expression
+     * @returns {Array<string>}     - converted RPN expression
+     */
+    static toRPN = (exp: Array<string>): Array<string> => {
         let outStack: Array<string> = [];
         let opStack: Array<string> = [];
 
-        while (eq.length > 0) {
-            let head: string = eq.splice(0, 1)[0];
+        while (exp.length > 0) {
+            let head: string = exp.splice(0, 1)[0];
 
             switch (true) {
+                // handle parentheses
                 case Aux.isPA(head):
                     if (head === '(')
                         opStack.push(head);
@@ -65,34 +76,48 @@ class Solver {
                         opStack.pop();
                     }
                     break;
+                // handle operand
                 case Aux.isOP(head):
                     while (opStack.length > 0 && precMap[opStack[opStack.length - 1]] > precMap[head])
                         outStack.push(opStack.pop() || '');
 
                     opStack.push(head);
                     break;
-
+                // handle number
                 default:
                     outStack.push(head);
             }
         }
 
+        // push remaining
         while (opStack.length > 0)
             outStack.push(opStack.pop() || '');
 
         return outStack;
     }
 
-    static solve = (eq: Array<string>): number => Solver.solveRec(Solver.toRPN(eq));
+    /**
+     * Evaluates an infix-notated expression
+     * @param {Array<string>} exp   - tokenzied infix-notated expression
+     * @returns                     - evaluated value
+     */
+    static solve = (exp: Array<string>): number => Solver.solveRec(Solver.toRPN(exp));
+
+    /**
+     * Evaluates a reverse polish notated expression
+     * @param {Array<string>} rpn   - tokenized rpn expression
+     * @returns {number}            - evaluated value
+     */
+    static solveRPN = (rpn: Array<string>): number => Solver.solveRec(rpn);
 
     // private methods
 
-    static solveRec = (rpn: Array<string>, stack: Array<number> = []): number => {
+    private static solveRec = (rpn: Array<string>, stack: Array<number> = []): number => {
         if (rpn.length === 0)
             return stack[0];
         else {
             let head: string = rpn.splice(0, 1)[0];
-            
+
             if (Aux.isOP(head)) {
                 let num1: number = stack.splice(stack.length - 1, 1)[0];
                 let num2: number = stack.splice(stack.length - 1, 1)[0];
