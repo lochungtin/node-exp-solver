@@ -24,21 +24,31 @@ npm install --save @enigmaoffline/node-exp-solver
 ```js
 const Solver = require('@enigmaoffline/node-exp-solver');
 
+// Tokenization
 console.log(Solver.tokenize('-1+2*(3-4)/5+(-6+-7)'));
 // => [ '-1', '+', '2', '*', '(', '3', '-', '4', ')', '/', '5', '+', '(', '-6', '+', '-7', ')' ]
+console.log(Solver.tokenize('1*2^3+3'));
+// => [ '1', '*', '2', '^', '3', '+', '3' ]
 
-console.log(Solver.toRPN('1+2*3'.split('')));
+
+// Infix to RPN
+console.log(Solver.toRPN(Solver.tokenize('1+2*3')));
 // => [ '1', '2', '3', '*', '+' ]
 
-console.log(console.log(Solver.solve('1+2*3'.split(''))));
+
+// Basic Solve
+console.log(Solver.solve(Solver.tokenize('1+2*3')));
 // => 7
+
+// Solve RPN
+console.log(Solver.solveRPN(Solver.toRPN(Solver.tokenize('-2+3^2+1'))));
+// => 8
+
 ```
 
-## Next Step
+## Next Steps
 
-1. Ability to handle power functions
-    1. Power functions
-    2. Root functions
+1. Ability to handle Min / Max functions
 2. Ability to handle trig functions
 3. Ability to handle log functions
 
