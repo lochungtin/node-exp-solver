@@ -10,6 +10,7 @@ Mathematical expression solver / Reverse Polish Notation calculator for NodeJS
 - Tokenize infix-notated expressions
     - From string to array
     - Able to handle negative numbers
+    - Spacing independent
 
 ## Install
 
