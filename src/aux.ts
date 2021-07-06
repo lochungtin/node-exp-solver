@@ -1,4 +1,34 @@
+interface OpMapType {
+    [key: string]: number,
+}
+
 export class Aux {
+
+    static precMap: OpMapType = {
+        '+': 1,
+        '-': 1,
+        '*': 2,
+        '/': 2,
+        '^': 3,
+    }
+
+    static assoMap: OpMapType = {
+        '+': 0,
+        '-': 0,
+        '*': 0,
+        '/': 0,
+        '^': 1,
+    }
+
+    static funcMap: OpMapType = {
+        'sin': 0,
+        'cos': 0,
+        'tan': 0,
+        'max': 0,
+        'min': 0,
+        'ln': 0,
+        'log': 0,
+    }
 
     static isOP = (op: string): boolean => ['+', '-', '*', '/', '^'].indexOf(op) !== -1;
 
@@ -14,12 +44,12 @@ export class Aux {
             if (token === '(')
                 stack.push('(');
             if (token === ')') {
-                if (stack.length === 0) 
+                if (stack.length === 0)
                     return false;
                 stack.pop();
             }
         }
-    
+
         return stack.length === 0;
     }
 }

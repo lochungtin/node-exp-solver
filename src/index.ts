@@ -1,25 +1,5 @@
 import { Aux } from "./aux";
 
-interface OpMapType {
-    [key: string]: number,
-}
-
-const precMap: OpMapType = {
-    '+': 1,
-    '-': 1,
-    '*': 2,
-    '/': 2,
-    '^': 3,
-}
-
-const assoMap: OpMapType = {
-    '+': 0,
-    '-': 0,
-    '*': 0,
-    '/': 0,
-    '^': 1,
-}
-
 class Solver {
 
     /**
@@ -92,10 +72,10 @@ class Solver {
                 case Aux.isOP(head):
                     while (
                         opStack.length > 0 && (
-                            precMap[opStack[opStack.length - 1]] > precMap[head] ||
+                            Aux.precMap[opStack[opStack.length - 1]] > Aux.precMap[head] ||
                             (
-                                precMap[opStack[opStack.length - 1]] === precMap[head] &&
-                                assoMap[head] === 0
+                                Aux.precMap[opStack[opStack.length - 1]] === Aux.precMap[head] &&
+                                Aux.assoMap[head] === 0
                             )
                         ))
                         outStack.push(opStack.pop() || '');
