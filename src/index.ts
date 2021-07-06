@@ -1,14 +1,23 @@
 import { Aux } from "./aux";
 
-interface precMapType {
+interface OpMapType {
     [key: string]: number,
 }
 
-const precMap: precMapType = {
+const precMap: OpMapType = {
     '+': 1,
     '-': 1,
     '*': 2,
     '/': 2,
+    '^': 3,
+}
+
+const assoMap: OpMapType = {
+    '+': 0,
+    '-': 0,
+    '*': 0,
+    '/': 0,
+    '^': 1,
 }
 
 class Solver {
@@ -22,28 +31,32 @@ class Solver {
         let res: Array<string> = [];
         let term: string = '';
 
-        exp.split('').forEach((ch: string, index: number) => {
-            switch (true) {
-                // negative numbers
-                case ch === '-' && index === 0:
-                case ch === '-' && term === '' && Aux.isOP(res[res.length - 1]):
-                case ch === '-' && term === '' && res[res.length - 1] === '(':
-                    term = '-';
-                    break;
-                // operands
-                case Aux.isOP(ch):
-                case Aux.isPA(ch):
-                    if (term !== '')
-                        res.push(term);
+        exp
+            .split('')
+            .map((token: string): string => token.trim())
+            .filter((token: string): boolean => token !== '')
+            .forEach((ch: string, index: number) => {
+                switch (true) {
+                    // negative numbers
+                    case ch === '-' && index === 0:
+                    case ch === '-' && term === '' && Aux.isOP(res[res.length - 1]):
+                    case ch === '-' && term === '' && res[res.length - 1] === '(':
+                        term = '-';
+                        break;
+                    // operands
+                    case Aux.isOP(ch):
+                    case Aux.isPA(ch):
+                        if (term !== '')
+                            res.push(term);
 
-                    res.push(ch);
-                    term = '';
-                    break;
-                // numbers
-                default:
-                    term += ch;
-            }
-        });
+                        res.push(ch);
+                        term = '';
+                        break;
+                    // numbers
+                    default:
+                        term += ch;
+                }
+            });
 
         // push remaining term to result
         if (term !== '')

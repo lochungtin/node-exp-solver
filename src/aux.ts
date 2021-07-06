@@ -1,6 +1,8 @@
 export class Aux {
 
-    static isOP = (op: string): boolean => ['+', '-', '*', '/'].indexOf(op) !== -1;
+    static isOP = (op: string): boolean => ['+', '-', '*', '/', '^'].indexOf(op) !== -1;
+
+    static isLA = (op: string): boolean => ['+', '-', '*', '/'].indexOf(op) !== -1;
 
     static isPA = (op: string): boolean => op === '(' || op === ')';
 
