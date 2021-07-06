@@ -32,9 +32,8 @@ class Solver {
         let term: string = '';
 
         exp
+            .replace(/ /g, '')
             .split('')
-            .map((token: string): string => token.trim())
-            .filter((token: string): boolean => token !== '')
             .forEach((ch: string, index: number) => {
                 switch (true) {
                     // negative numbers
@@ -91,7 +90,14 @@ class Solver {
                     break;
                 // handle operand
                 case Aux.isOP(head):
-                    while (opStack.length > 0 && precMap[opStack[opStack.length - 1]] > precMap[head])
+                    while (
+                        opStack.length > 0 && (
+                            precMap[opStack[opStack.length - 1]] > precMap[head] ||
+                            (
+                                precMap[opStack[opStack.length - 1]] === precMap[head] &&
+                                assoMap[head] === 0
+                            )
+                        ))
                         outStack.push(opStack.pop() || '');
 
                     opStack.push(head);
@@ -151,6 +157,8 @@ class Solver {
                         return Solver.solveRec(rpn, [...stack, num2 * num1]);
                     case '/':
                         return Solver.solveRec(rpn, [...stack, num2 / num1]);
+                    case '^':
+                        return Solver.solveRec(rpn, [...stack, Math.pow(num2, num1)]);
                 }
             }
             return Solver.solveRec(rpn, [...stack, parseFloat(head)]);
