@@ -11,11 +11,17 @@ class Solver {
         let res: Array<string> = [];
         let term: string = '';
 
-        exp
+        let splt: Array<string> = exp
             .replace(/ /g, '')
-            .split('')
-            .forEach((ch: string, index: number) => {
+            .split('');
+        
+        splt.forEach((ch: string, index: number) => {
+                let next3: string = ch + (splt[index + 1] || '') + (splt[index + 2]  || '');
                 switch (true) {
+                    // function
+                    case Aux.isFN(next3):
+                        res.push(next3);
+                        break;
                     // negative numbers
                     case ch === '-' && index === 0:
                     case ch === '-' && term === '' && Aux.isOP(res[res.length - 1]):
