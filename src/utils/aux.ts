@@ -26,20 +26,21 @@ export class Aux {
         'tan': 0,
         'max': 0,
         'min': 0,
-        'ln': 0,
+        'log': 0,
     }
 
     // operator checker
     static isOP = (op: string): boolean => ['+', '-', '*', '/', '^'].indexOf(op) !== -1;
 
     // function checker
-    static isFN = (fn: string): boolean => ['sin', 'cos', 'tan', 'max', 'min', 'ln'].indexOf(fn) !== -1;
+    static isFN = (fn: string): boolean => ['sin', 'cos', 'tan', 'max', 'min', 'log'].indexOf(fn) !== -1;
 
     // association checker
     static isLA = (op: string): boolean => ['+', '-', '*', '/'].indexOf(op) !== -1;
 
     static isPA = (op: string): boolean => op === '(' || op === ')';
 
+    // validator
     static validate = (tokens: Array<string>): boolean => {
         let stack: Array<string> = [];
 

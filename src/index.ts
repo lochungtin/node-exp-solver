@@ -16,7 +16,7 @@ class Solver {
             .split('');
         
         splt.forEach((ch: string, index: number) => {
-                let next3: string = ch + (splt[index + 1] || '') + (splt[index + 2]  || '');
+                let next3: string = ch + (splt[index + 1] || '') + (splt[index + 2] || '');
                 switch (true) {
                     // function
                     case Aux.isFN(next3):
