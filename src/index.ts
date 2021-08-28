@@ -1,4 +1,4 @@
-import { Aux } from "./aux";
+import { Aux } from "./utils/aux";
 
 class Solver {
 

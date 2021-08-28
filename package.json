@@ -1,6 +1,6 @@
 {
   "name": "@enigmaoffline/node-exp-solver",
-  "version": "1.0.1",
+  "version": "1.0.4",
   "description": "Mathematical expression solver / Reverse Polish Notation calculator for NodeJS",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
